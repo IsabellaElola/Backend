@@ -1,0 +1,29 @@
+import pool from './db.js';
+
+export const getStudents = async () => {
+    const [rows] = await pool.query ('SELECT * FROM tblbook');
+    return rows;
+}
+
+export const insertStudents = async (srcode, name, course) => {
+    const [result] = await pool.query(
+        'INSERT INTO tblstudent (srcode, name, course) values(?, ?, ?)',
+        [srcode, name, course] 
+    );
+    return result.insertId;
+}
+
+export const updateStudents = async (srcode, name, course, studentId) => {
+    const [result] = await pool.query(
+    "Update tblstudent Set srcode=?, name=?,course=? WHERE id=?",
+    [srcode, name, course, studentId]
+    )
+    return result.affectedRows;
+}
+export const deleteStudents =  async (studentId) =>{
+    const [result] = await pool.query(
+    "delete from tblstudent Where id=?",
+    [studentId]
+    )
+}
+
