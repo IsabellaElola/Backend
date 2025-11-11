@@ -1,7 +1,7 @@
 import pool from './db.js';
 
 export const getStudents = async () => {
-    const [rows] = await pool.query ('SELECT * FROM tblbook');
+    const [rows] = await pool.query ('SELECT * FROM tblstudent');
     return rows;
 }
 
@@ -15,9 +15,9 @@ export const insertStudents = async (srcode, name, course) => {
 
 export const updateStudents = async (srcode, name, course, studentId) => {
     const [result] = await pool.query(
-    "Update tblstudent Set srcode=?, name=?,course=? WHERE id=?",
-    [srcode, name, course, studentId]
-    )
+        'UPDATE tblstudent SET srcode = ?, name = ?, course = ? WHERE id = ?',
+        [srcode, name, course, studentId]
+    );
     return result.affectedRows;
 }
 export const deleteStudents =  async (studentId) =>{

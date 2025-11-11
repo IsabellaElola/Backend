@@ -2,8 +2,8 @@ import * as StudentModel from '../models/StudentModels.js';
 
 export const fetchStudents = async (req, res) => {
     try {
-        const student = await StudentModel.getStudent();
-        res.status(200).json({success: true, messsage: student});
+        const student = await StudentModel.getStudents();
+        res.status(200).json({success: true, message: student});
     }catch (e){
         console.log(e);
         res.status(500).json({
@@ -24,31 +24,25 @@ export const createStudents = async (req, res) => {
     }
 }
 
-export const editStudents = async (req,res) =>{
-    const {srcode, name, course} = req.body;
-    const {studentsId}= req.params;
-
-    try{
-        const updateId = await StudentModel.updateBook(srcode, name, course, studentId);
-        res.status(200).json({
-            success:true,
-            message: updateId
-        });
-    }catch(e){
+export const editStudents = async (req, res) => { 
+    const { srcode, name, course } = req.body;
+    const { studentId } = req.params;
+    try {
+        const updatedId = await StudentModel.updateStudents(srcode, name, course, studentId);
+        res.status(200).json({success: true, message: updatedId});
+    } catch (e) {
         console.log(e);
-        res.status(500).json({
-            success: false,
-            message: "Internal Server Error"
-        });
+        res.status(500).json({success: false, message: "Internal Server Error"});
     }
 }
+
 
 export const deleteStudents = async(req,res)=>{
 
     const {studentId}= req.params;
 
     try{
-        const deleteID = await StudentModel.deleteBook(studentId);
+        const deleteID = await StudentModel.deleteStudents(studentId);
         res.status(200).json ({
             success:true,
             messsage: deleteID
