@@ -51,7 +51,7 @@ export const deleteBooks = async(req,res)=>{
         const deleteID = await BookModel.deleteBook(bookId);
         res.status(200).json ({
             success:true,
-            messsage: deleteID
+            message: deleteID
         });
     }catch(e){
         console.log(e);

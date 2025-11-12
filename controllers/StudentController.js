@@ -45,7 +45,7 @@ export const deleteStudents = async(req,res)=>{
         const deleteID = await StudentModel.deleteStudents(studentId);
         res.status(200).json ({
             success:true,
-            messsage: deleteID
+            message: deleteID
         });
     }catch(e){
         console.log(e);
